@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  # # Database
+  # db:
+  #   image: mysql:5.7
+  #   container_name: docktut_db
+  #   volumes: 
+  #     - ./.docker/db:/var/lib/mysql
+  #     - ./.docker/db/my.cnf:/etc/mysql/my.cnf
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #     MYSQL_DATABASE: wordpress
+  #     MYSQL_USER: wordpress
+  #     MYSQL_PASSWORD: wordpress
+  #   ports: 
+  #     - "3306:3306"
+  
+  # Web server
+  webserver:
+    image: nginx:latest
+    container_name: docktut_nginx
+    volumes:
+      - ./code:/code
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+    ports:
+      - "80:80"
+
+  php:
+    image: php:7.0-fpm
+    container_name: docktut_php
+    volumes:
+      - ./code:/code
+
+  
+
+  
